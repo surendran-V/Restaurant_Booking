@@ -52,8 +52,12 @@ export default function BookingForm() {
       setSuccess(true)
       reset()
       setTimeout(() => setSuccess(false), 3000)
-    } catch (err: any) {
-      setError(err.response?.data?.message || 'An error occurred')
+    } catch (err) {
+        if (axios.isAxiosError(err)){
+      setError(err.response?.data?.message || 'An error occurred')}
+      else{
+        setError('An unexpected error occurred');
+      }
     } finally {
       setLoading(false)
     }
