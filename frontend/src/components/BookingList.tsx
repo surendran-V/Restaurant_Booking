@@ -1,9 +1,7 @@
 // src/components/BookingList.tsx
-'use client'
-
-import { useState, useEffect } from 'react'
-import axios from 'axios'
-import { format } from 'date-fns'
+import { useState, useEffect, useCallback } from 'react';
+import axios from 'axios';
+import { format } from 'date-fns';
 
 type Booking = {
   _id: string;
@@ -13,44 +11,44 @@ type Booking = {
   date: string;
   time: string;
   guests: number;
-}
+};
 
 export default function BookingList() {
-  const [bookings, setBookings] = useState<Booking[]>([])
-  const [loading, setLoading] = useState(true)
-  const [selectedDate, setSelectedDate] = useState(format(new Date(), 'yyyy-MM-dd'))
+  const [bookings, setBookings] = useState<Booking[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [selectedDate, setSelectedDate] = useState(format(new Date(), 'yyyy-MM-dd'));
+
+  const fetchBookings = useCallback(async () => {
+    try {
+      setLoading(true);
+      const response = await axios.get(`http://localhost:5000/api/bookings?date=${selectedDate}`);
+      setBookings(response.data);
+    } catch (error) {
+      console.error('Error fetching bookings:', error);
+    } finally {
+      setLoading(false);
+    }
+  }, [selectedDate]);
 
   useEffect(() => {
-    fetchBookings()
-  }, [selectedDate])
-
-  const fetchBookings = async () => {
-    try {
-      setLoading(true)
-      const response = await axios.get(`http://localhost:5000/api/bookings?date=${selectedDate}`)
-      setBookings(response.data)
-    } catch (error) {
-      console.error('Error fetching bookings:', error)
-    } finally {
-      setLoading(false)
-    }
-  }
+    fetchBookings();
+  }, [fetchBookings]);
 
   const handleDelete = async (id: string) => {
     if (window.confirm('Are you sure you want to delete this booking?')) {
       try {
-        await axios.delete(`http://localhost:5000/api/bookings/${id}`)
-        fetchBookings()
+        await axios.delete(`http://localhost:5000/api/bookings/${id}`);
+        fetchBookings();
       } catch (error) {
-        console.error('Error deleting booking:', error)
+        console.error('Error deleting booking:', error);
       }
     }
-  }
+  };
 
   return (
     <div className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-lg">
       <h2 className="text-2xl font-bold mb-6">Bookings</h2>
-      
+
       <div className="mb-4">
         <label className="block text-sm font-medium mb-1">Select Date</label>
         <input
@@ -94,5 +92,5 @@ export default function BookingList() {
         </div>
       )}
     </div>
-  )
+  );
 }
