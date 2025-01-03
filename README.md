@@ -79,6 +79,7 @@ C:\Work\Projects\Restaurant_Booking
 The application is deployed using:
 - Frontend: Vercel
 - Backend: Railway/Heroku
+  
   Visit the live application at: (still needs to be deployed)
 
 ## Video Demo
