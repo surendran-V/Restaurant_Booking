@@ -68,29 +68,29 @@ export default function CalendarView() {
 
   // Determine the CSS class for a given day
   const getDayClass = (date: Date) => {
-    const baseClass = "h-10 w-10 rounded-full flex items-center justify-center cursor-pointer hover:bg-gray-100"
+    const baseClass = "h-10 w-10 rounded-full flex items-center justify-center cursor-pointer hover:bg-gray-200"
     
     if (isSameDay(date, selectedDate)) {
-      return `${baseClass} bg-blue-600 text-white hover:bg-blue-700`
+      return `${baseClass} bg-blue-700 text-white hover:bg-blue-800`
     }
     
     if (isToday(date)) {
-      return `${baseClass} border-2 border-blue-600`
+      return `${baseClass} border-2 border-blue-600 text-blue-600`
     }
     
-    return baseClass
+    return `${baseClass} text-gray-800`
   }
 
   return (
     <div className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-lg">
       <div className="mb-8">
-        <h2 className="text-2xl font-bold text-center mb-4">
+        <h2 className="text-2xl font-bold text-center mb-4 text-gray-900">
           {format(selectedDate, 'MMMM yyyy')}
         </h2>
         
         <div className="grid grid-cols-7 gap-2 mb-4">
           {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
-            <div key={day} className="text-center font-medium text-gray-500">
+            <div key={day} className="text-center font-medium text-gray-700">
               {day}
             </div>
           ))}
@@ -118,17 +118,17 @@ export default function CalendarView() {
       </div>
 
       <div className="mt-8">
-        <h3 className="text-xl font-semibold mb-4">
+        <h3 className="text-2xl font-bold text-center mb-4 text-gray-900">
           Available Times for {format(selectedDate, 'MMMM d, yyyy')}
         </h3>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2">
           {selectedSlots.map(({ time, isBooked }) => (
             <div
               key={time}
-              className={`p-2 rounded text-center ${isBooked ? 'bg-gray-100 text-gray-500 cursor-not-allowed' : 'bg-green-100 text-green-700 cursor-pointer hover:bg-green-200'}`}
+              className={`p-2 rounded text-center ${isBooked ? 'bg-gray-200 text-gray-500 cursor-not-allowed' : 'bg-green-100 text-green-700 cursor-pointer hover:bg-green-200'}`}
             >
               {time}
-              {isBooked && <span className="block text-xs">Booked</span>}
+              {isBooked && <span className="block text-xs text-gray-600">Booked</span>}
             </div>
           ))}
         </div>

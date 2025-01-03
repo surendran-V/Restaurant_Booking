@@ -1,4 +1,3 @@
-// src/components/BookingForm.tsx
 'use client'
 
 import { useState } from 'react'
@@ -36,7 +35,7 @@ export default function BookingForm() {
   const [success, setSuccess] = useState(false)
   const [error, setError] = useState('')
 
-  const { register, handleSubmit, formState: { errors }, reset } = useForm<FormData>({
+  const { register, handleSubmit, formState: { errors }, reset } = useForm<FormData>( {
     resolver: yupResolver(schema)
   })
 
@@ -53,10 +52,11 @@ export default function BookingForm() {
       reset()
       setTimeout(() => setSuccess(false), 3000)
     } catch (err) {
-        if (axios.isAxiosError(err)){
-      setError(err.response?.data?.message || 'An error occurred')}
-      else{
-        setError('An unexpected error occurred');
+      if (axios.isAxiosError(err)){
+        setError(err.response?.data?.message || 'An error occurred')
+      }
+      else {
+        setError('An unexpected error occurred')
       }
     } finally {
       setLoading(false)
@@ -65,7 +65,7 @@ export default function BookingForm() {
 
   return (
     <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-lg">
-      <h2 className="text-2xl font-bold mb-6 text-center">Book a Table</h2>
+      <h2 className="text-2xl font-bold mb-6 text-center text-gray-900">Book a Table</h2>
       
       {success && (
         <div className="mb-4 p-4 bg-green-100 text-green-700 rounded">
@@ -81,11 +81,11 @@ export default function BookingForm() {
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <div>
-          <label className="block text-sm font-medium mb-1">Name</label>
+          <label className="block text-sm font-medium mb-1 text-gray-700">Name</label>
           <input
             type="text"
             {...register('name')}
-            className="w-full p-2 border rounded"
+            className="w-full p-2 border rounded text-gray-900"
           />
           {errors.name && (
             <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>
@@ -93,11 +93,11 @@ export default function BookingForm() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium mb-1">Email</label>
+          <label className="block text-sm font-medium mb-1 text-gray-700">Email</label>
           <input
             type="email"
             {...register('email')}
-            className="w-full p-2 border rounded"
+            className="w-full p-2 border rounded text-gray-900"
           />
           {errors.email && (
             <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
@@ -105,11 +105,11 @@ export default function BookingForm() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium mb-1">Phone</label>
+          <label className="block text-sm font-medium mb-1 text-gray-700">Phone</label>
           <input
             type="tel"
             {...register('phone')}
-            className="w-full p-2 border rounded"
+            className="w-full p-2 border rounded text-gray-900"
           />
           {errors.phone && (
             <p className="text-red-500 text-sm mt-1">{errors.phone.message}</p>
@@ -117,12 +117,12 @@ export default function BookingForm() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium mb-1">Date</label>
+          <label className="block text-sm font-medium mb-1 text-gray-700">Date</label>
           <input
             type="date"
             {...register('date')}
             min={format(new Date(), 'yyyy-MM-dd')}
-            className="w-full p-2 border rounded"
+            className="w-full p-2 border rounded text-gray-900"
           />
           {errors.date && (
             <p className="text-red-500 text-sm mt-1">{errors.date.message}</p>
@@ -130,10 +130,10 @@ export default function BookingForm() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium mb-1">Time</label>
+          <label className="block text-sm font-medium mb-1 text-gray-700">Time</label>
           <select
             {...register('time')}
-            className="w-full p-2 border rounded"
+            className="w-full p-2 border rounded text-gray-900"
           >
             <option value="">Select a time</option>
             {timeSlots.map(time => (
@@ -146,13 +146,13 @@ export default function BookingForm() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium mb-1">Number of Guests</label>
+          <label className="block text-sm font-medium mb-1 text-gray-700">Number of Guests</label>
           <input
             type="number"
             {...register('guests')}
             min="1"
             max="10"
-            className="w-full p-2 border rounded"
+            className="w-full p-2 border rounded text-gray-900"
           />
           {errors.guests && (
             <p className="text-red-500 text-sm mt-1">{errors.guests.message}</p>

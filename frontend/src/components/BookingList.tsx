@@ -54,15 +54,15 @@ export default function BookingList() {
 
   return (
     <div className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-lg">
-      <h2 className="text-2xl font-bold mb-6">Bookings</h2>
+      <h2 className="text-2xl font-bold mb-6 text-center text-gray-900">Bookings</h2>
 
       <div className="mb-4">
-        <label className="block text-sm font-medium mb-1">Select Date</label>
+        <label className="block text-sm font-medium mb-1 text-gray-700">Select Date</label>
         <input
           type="date"
           value={selectedDate}
           onChange={(e) => setSelectedDate(e.target.value)}
-          className="p-2 border rounded"
+          className="p-2 border rounded text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-600"
         />
       </div>
 
@@ -87,7 +87,7 @@ export default function BookingList() {
             >
               <div className="flex justify-between items-start">
                 <div>
-                  <h3 className="font-semibold">{booking.name}</h3>
+                  <h3 className="font-semibold text-gray-800">{booking.name}</h3>
                   <p className="text-sm text-gray-600">{booking.email}</p>
                   <p className="text-sm text-gray-600">{booking.phone}</p>
                   <p className="text-sm text-gray-600">
