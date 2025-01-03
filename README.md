@@ -79,17 +79,8 @@ C:\Work\Projects\Restaurant_Booking
 The application is deployed using:
 - Frontend: Vercel
 - Backend: Railway/Heroku
+  Visit the live application at: (still needs to be deployed)
 
-Visit the live application at: [Your-Deployment-URL]
+## Video Demo
+https://drive.google.com/file/d/1QpxaJztaN0ceIjNjt6UrhowHQRIhNMCm/view?usp=sharing
 
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Commit your changes
-4. Push to the branch
-5. Open a Pull Request
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
