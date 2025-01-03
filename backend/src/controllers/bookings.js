@@ -31,11 +31,11 @@ exports.createBooking = async (req, res) => {
 
 exports.getBookings = async (req, res) => {
   try {
-    const { date } = req.query;
+    const { date, start, end } = req.query;
     let query = {};
     
     if (date) {
-      // If date is provided, get bookings for that date
+      // If single date is provided
       const startOfDay = new Date(date);
       startOfDay.setHours(0, 0, 0, 0);
       
@@ -45,6 +45,18 @@ exports.getBookings = async (req, res) => {
       query.date = {
         $gte: startOfDay,
         $lte: endOfDay
+      };
+    } else if (start && end) {
+      // If date range is provided
+      const startDate = new Date(start);
+      startDate.setHours(0, 0, 0, 0);
+      
+      const endDate = new Date(end);
+      endDate.setHours(23, 59, 59, 999);
+      
+      query.date = {
+        $gte: startDate,
+        $lte: endDate
       };
     }
 
@@ -57,7 +69,6 @@ exports.getBookings = async (req, res) => {
     });
   }
 };
-
 exports.deleteBooking = async (req, res) => {
   try {
     const booking = await Booking.findByIdAndDelete(req.params.id);

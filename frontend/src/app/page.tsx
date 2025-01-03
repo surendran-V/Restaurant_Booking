@@ -1,6 +1,7 @@
 // src/app/page.tsx
 import BookingForm from '@/components/BookingForm'
 import BookingList from '@/components/BookingList'
+import CalendarView from '@/components/CalendarView'
 
 export default function Home() {
   return (
@@ -9,9 +10,13 @@ export default function Home() {
         Restaurant Booking System
       </h1>
       
-      <div className="grid md:grid-cols-2 gap-8">
-        <BookingForm />
-        <BookingList />
+      <div className="grid gap-8">
+        <CalendarView />
+        
+        <div className="grid md:grid-cols-2 gap-8">
+          <BookingForm />
+          <BookingList />
+        </div>
       </div>
     </div>
   )
